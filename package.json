@@ -1,0 +1,22 @@
+{
+  "name": "@ulti-mate-org/identicon",
+  "version": "0.1.0",
+  "description": "Deterministic avatar generator for ulti-mate profiles",
+  "main": "src/index.js",
+  "type": "module",
+  "license": "MIT",
+  "author": "Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulti-mate-org/ulti-mate-identicon"
+  },
+  "bugs": {
+    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon/issues"
+  },
+  "homepage": "https://github.com/ulti-mate-org/ulti-mate-identicon#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon.git"
+  },
+  "keywords": ["avatar", "identicon", "svg", "hash"]
+}
