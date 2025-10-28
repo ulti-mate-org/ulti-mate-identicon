@@ -2,7 +2,7 @@
   "name": "@ulti-mate-org/identicon",
   "version": "1.0.0",
   "description": "Deterministic avatar generator for ulti-mate profiles",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
   "license": "MIT",
   "author": "Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)",

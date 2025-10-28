@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+MAIN_FUNCTION="generateIdenticon"
+
+mkdir -p dist
+
+cat src/*.js \
+  | grep -vE 'console\.(log|debug|error|warn)\(' \
+  | sed -E 's/^\s*export\s+//g' \
+  > dist/index.js
+
+echo "" >> dist/index.js
+echo "export { $MAIN_FUNCTION };" >> dist/index.js
+
+echo "built dist/index.js (no console logs, cleaned exports, added main export)"
