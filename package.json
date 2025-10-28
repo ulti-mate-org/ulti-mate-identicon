@@ -8,15 +8,19 @@
   "author": "Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ulti-mate-org/ulti-mate-identicon"
+    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon.git"
   },
   "bugs": {
     "url": "https://github.com/ulti-mate-org/ulti-mate-identicon/issues"
   },
   "homepage": "https://github.com/ulti-mate-org/ulti-mate-identicon#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon.git"
-  },
-  "keywords": ["avatar", "identicon", "svg", "hash"]
+  "keywords": [
+    "avatar",
+    "identicon",
+    "svg",
+    "hash"
+  ],
+  "dependencies": {
+    "@sindresorhus/fnv1a": "^3.1.0"
+  }
 }

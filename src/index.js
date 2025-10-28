@@ -7,6 +7,7 @@
 // author: Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)
 
 import { DEFAULT_GRID, DEFAULT_CELL_SIZE } from './constants.js';
+import { generateHash } from './hash.js';
 
 /*
  * Generates a unique identicon based on the provided seed.
@@ -18,6 +19,8 @@ import { DEFAULT_GRID, DEFAULT_CELL_SIZE } from './constants.js';
  */
 function generateIdenticon(seed, grid = DEFAULT_GRID, size = DEFAULT_CELL_SIZE) {
   console.log(`[DEBUG]: Generating identicon with seed: ${seed}, grid: ${grid}, size: ${size}`);
+
+  const hash = generateHash(seed);
 }
 
 export { generateIdenticon };
