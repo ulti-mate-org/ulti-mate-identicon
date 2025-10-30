@@ -7,7 +7,7 @@
            │
            ▼
    [Hash generator]
-   - convert seed to hash (@sindresorhus/fnv1a)
+   - convert seed to hash
    - output: hexadecimal string
            │
            ▼

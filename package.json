@@ -1,6 +1,6 @@
 {
   "name": "@ulti-mate-org/identicon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Deterministic avatar generator for ulti-mate profiles",
   "main": "dist/index.js",
   "type": "module",
@@ -19,8 +19,5 @@
     "identicon",
     "svg",
     "hash"
-  ],
-  "dependencies": {
-    "@sindresorhus/fnv1a": "^3.1.0"
-  }
+  ]
 }

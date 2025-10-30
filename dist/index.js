@@ -1,24 +1,6 @@
-import fnv1a from '@sindresorhus/fnv1a';
-
 const DEFAULT_GRID = 5;
 
 const DEFAULT_CELL_SIZE = 5;
-
-/*
- * Generates a 128-bit hash from the given seed using the FNV-1a algorithm.
- *
- * @param {string} seed - The seed string to hash.
- * @returns {string} - The generated 128-bit hash as a hexadecimal string.
- */
-function generateHash(seed) {
-  // we generate a 128-bit hash using the fnv1a algorithm,
-  // since fnv1a returns a BigInt, we convert it to a hex string
-  // and pad the result to ensure it's 32 characters long (128 bits in hex)
-  // ref: https://github.com/sindresorhus/fnv1a
-  var hash = fnv1a(seed, { size: 128 }).toString(16).padStart(32, '0');
-
-  return hash;
-}
 
 /*
  * Generates a unique identicon based on the provided seed.
@@ -41,6 +23,41 @@ function generateIdenticon(seed, grid = DEFAULT_GRID, size = DEFAULT_CELL_SIZE) 
 
   return svg;
 }
+
+/*
+ * Generates a custom non-cryptographic hash.
+ *
+ * @param {string} seed - The input string.
+ * @param {number} size - Output size in bytes (e.g., 16 for 128-bit).
+ * @returns {string} - Hexadecimal hash string.
+ */
+function generateHash(seed, size = 16) {
+	if (typeof seed !== 'string') seed = String(seed);
+	if (size <= 0) throw new Error('Size must be > 0');
+
+	let state = BigInt(0xcbf29ce484222325n); // offset basis
+	const prime = 0x100000001b3n; // large odd prime
+	const mask = (1n << BigInt(size * 8)) - 1n; // bitmask for desired length
+
+	for (let i = 0; i < seed.length; i++) {
+		const c = BigInt(seed.charCodeAt(i));
+		// mix with bit shifts, XOR, and modular multiplication
+		state ^= c + BigInt(i * 31);
+		state = (state * prime) & mask;
+		state ^= (state >> 13n) ^ (state << 7n);
+		state &= mask;
+	}
+
+	// final avalanche mixing
+	for (let i = 0; i < 4; i++) {
+		state ^= (state >> 11n) ^ (state << 5n);
+		state = (state * prime) & mask;
+	}
+
+	const hex = state.toString(16).padStart(size * 2, '0');
+	return hex;
+}
+
 
 /*
  * Generates a unique pattern based on the provided hash and size.

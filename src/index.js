@@ -1,4 +1,4 @@
-// ulti-mate-identicon — v1.0.0 — unique avatar generator
+// ulti-mate-identicon — v1.1.0 — unique avatar generator
 //
 // This project is part of the ulti-mate organization suite,
 // see: https://ulti-mate.org

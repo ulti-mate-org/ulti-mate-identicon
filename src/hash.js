@@ -1,22 +1,37 @@
-import fnv1a from '@sindresorhus/fnv1a';
-
 /*
- * Generates a 128-bit hash from the given seed using the FNV-1a algorithm.
+ * Generates a custom non-cryptographic hash.
  *
- * @param {string} seed - The seed string to hash.
- * @returns {string} - The generated 128-bit hash as a hexadecimal string.
+ * @param {string} seed - The input string.
+ * @param {number} size - Output size in bytes (e.g., 16 for 128-bit).
+ * @returns {string} - Hexadecimal hash string.
  */
-function generateHash(seed) {
-  console.log(`[DEBUG]: Generating hash for seed: ${seed}`);
+function generateHash(seed, size = 16) {
+	console.log('generateHash called with seed:', seed, 'and size:', size);
+	if (typeof seed !== 'string') seed = String(seed);
+	if (size <= 0) throw new Error('Size must be > 0');
 
-  // we generate a 128-bit hash using the fnv1a algorithm,
-  // since fnv1a returns a BigInt, we convert it to a hex string
-  // and pad the result to ensure it's 32 characters long (128 bits in hex)
-  // ref: https://github.com/sindresorhus/fnv1a
-  var hash = fnv1a(seed, { size: 128 }).toString(16).padStart(32, '0');
-  console.log(`[DEBUG]: Generated hash: ${hash}`);
+	let state = BigInt(0xcbf29ce484222325n); // offset basis
+	const prime = 0x100000001b3n; // large odd prime
+	const mask = (1n << BigInt(size * 8)) - 1n; // bitmask for desired length
 
-  return hash;
+	for (let i = 0; i < seed.length; i++) {
+		const c = BigInt(seed.charCodeAt(i));
+		// mix with bit shifts, XOR, and modular multiplication
+		state ^= c + BigInt(i * 31);
+		state = (state * prime) & mask;
+		state ^= (state >> 13n) ^ (state << 7n);
+		state &= mask;
+	}
+
+	// final avalanche mixing
+	for (let i = 0; i < 4; i++) {
+		state ^= (state >> 11n) ^ (state << 5n);
+		state = (state * prime) & mask;
+	}
+
+	const hex = state.toString(16).padStart(size * 2, '0');
+	console.log('Generated hash:', hex);
+	return hex;
 }
 
 export { generateHash };
