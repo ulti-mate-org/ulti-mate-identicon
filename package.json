@@ -8,7 +8,7 @@
   "author": "Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon.git"
+    "url": "git+https://github.com/ulti-mate-org/ulti-mate-identicon.git"
   },
   "bugs": {
     "url": "https://github.com/ulti-mate-org/ulti-mate-identicon/issues"

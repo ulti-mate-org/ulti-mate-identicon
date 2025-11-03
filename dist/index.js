@@ -10,7 +10,7 @@ const DEFAULT_CELL_SIZE = 5;
  * @param {number} size - The size of the identicon in pixels.
  * @returns {string} - The SVG representing the generated identicon image.
  */
-function generateIdenticon(seed, grid = DEFAULT_GRID, size = DEFAULT_CELL_SIZE) {
+export default function generateIdenticon(seed, grid = DEFAULT_GRID, size = DEFAULT_CELL_SIZE) {
   const hash = generateHash(seed);
 
   const pattern = generatePattern(hash, grid);
@@ -106,24 +106,20 @@ function generatePattern(hash, grid) {
  * @returns {string} - The generated SVG string.
  */
 function generateSvg(size, cellSize, grid, pattern, color) {
-  // We build the SVG content as a string following the SVG XML format.
-  // ref: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/Basic_shapes
-  let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+	// We build the SVG content as a string following the SVG XML format.
+	// ref: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/Basic_shapes
+	let d = "";
 
-  // TODO: modify this to support more states than just filled/empty
-  for (let row = 0; row < grid; row++) {
-    for (let col = 0; col < grid; col++) {
-      if (pattern[row][col] === 1) {
-        // Filled cell
-        const x = col * cellSize;
-        const y = row * cellSize;
-        svgContent += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${color}" />`;
-      }
-    }
-  }
-  svgContent += `</svg>`;
+	// TODO: modify this to support more states than just filled/empty
+	for (let row = 0; row < grid; row++) {
+		for (let col = 0; col < grid; col++) {
+			if (pattern[row][col]) {
+				const x = col * cellSize;
+				const y = row * cellSize;
+				d += `M${x} ${y}h${cellSize}v${cellSize}h-${cellSize}z`;
+			}
+		}
+	}
 
-  return svgContent;
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" fill="${color}"><rect width="100%" height="100%" fill="#fff"/><path d="${d}"/></svg>`;
 }
-
-export { generateIdenticon };
