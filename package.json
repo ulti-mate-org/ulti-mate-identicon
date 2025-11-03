@@ -8,12 +8,12 @@
   "author": "Emiliano Rizzonelli (emiliano.rizzonelli@proton.me)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ulti-mate-org/ulti-mate-identicon.git"
+    "url": "git+https://github.com/ulti-mate-org/identicon.git"
   },
   "bugs": {
-    "url": "https://github.com/ulti-mate-org/ulti-mate-identicon/issues"
+    "url": "https://github.com/ulti-mate-org/identicon/issues"
   },
-  "homepage": "https://github.com/ulti-mate-org/ulti-mate-identicon#readme",
+  "homepage": "https://github.com/ulti-mate-org/identicon#readme",
   "keywords": [
     "avatar",
     "identicon",
